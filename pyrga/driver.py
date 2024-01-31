@@ -112,7 +112,13 @@ class RGAClient:
         self.logger.info("Opening serial interface %s...", self._com_port)
         try:  # TODO: too wide of an exception handler, make sure to be OS aware too (/dev/tty vs COM4)
             self._com_obj = serial.Serial(
-                self._com_port, timeout=5, baudrate=28800, rtscts=1, bytesize=8, stopbits=1, parity="N",
+                    self._com_port,
+                    timeout=5,
+                    baudrate=28800,
+                    rtscts=True,
+                    bytesize=8,
+                    stopbits=serial.STOPBITS_ONE,
+                    parity=serial.PARITY_NONE,
             )
         except:
             raise RGAException(
